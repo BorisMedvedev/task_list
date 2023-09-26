@@ -24,7 +24,7 @@ export const myPage = () => {
     newItem.id = generateId();
 
     document.querySelector('.form-control').value = '';
-    document.querySelector('.btn').disabled = true;
+    document.querySelector('.btn-primary').disabled = true;
     myArray.push(newItem);
     localStorage.setItem('myArray', JSON.stringify(myArray));
     for (const item of myArray) {
