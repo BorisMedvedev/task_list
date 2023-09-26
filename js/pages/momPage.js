@@ -11,7 +11,7 @@ export const momPage = () => {
   const form = createForm();
   const list = createTodoList();
 
-  mainContainerMyPage.classList.add('container');
+  // mainContainerMyPage.classList.add('container');
 
   mainContainerMyPage.append(myTitle, form.form, list);
 
@@ -30,12 +30,14 @@ export const momPage = () => {
     momArray.push(newItem);
     localStorage.setItem('momArray', JSON.stringify(momArray));
     for (const item of momArray) {
-      list.append(createTodoItem(item));
+      const listItem = createTodoItem(item);
+      list.append(listItem.todoItem);
     }
   });
 
   for (const item of momArray) {
-    list.append(createTodoItem(item));
+    const listItem = createTodoItem(item);
+    list.append(listItem.todoItem);
   }
 
 

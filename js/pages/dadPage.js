@@ -11,10 +11,7 @@ export const dadPage = () => {
   const form = createForm(dadArray);
   const list = createTodoList();
 
-  mainContainerMyPage.classList.add('container');
-
   mainContainerMyPage.append(myTitle, form.form, list);
-
 
   form.form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -31,12 +28,14 @@ export const dadPage = () => {
     dadArray.push(newItem);
     localStorage.setItem('dadArray', JSON.stringify(dadArray));
     for (const item of dadArray) {
-      list.append(createTodoItem(item));
+      const listItem = createTodoItem(item);
+      list.append(listItem.todoItem);
     }
   });
 
   for (const item of dadArray) {
-    list.append(createTodoItem(item));
+    const listItem = createTodoItem(item);
+    list.append(listItem.todoItem);
   }
 
   return mainContainerMyPage;

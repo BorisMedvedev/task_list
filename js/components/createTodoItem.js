@@ -29,26 +29,30 @@ export const createTodoItem = (obj) => {
   wrapper.append(btnDone, btnDelete);
   todoItem.append(todoItemText, wrapper);
 
-  btnDone.addEventListener('click', () => {
-    obj.done;
-    obj.done = !obj.done;
+  // btnDone.addEventListener('click', () => {
+  //   obj.done;
+  //   obj.done = !obj.done;
 
-    if (obj.done) {
-      todoItem.classList.add('active');
-    } else {
-      todoItem.classList.remove('active');
-    }
-  });
+  //   if (obj.done) {
+  //     todoItem.classList.add('active');
+  //   } else {
+  //     todoItem.classList.remove('active');
+  //   }
+  // });
 
-  btnDelete.addEventListener('click', () => {
-    if (confirm('Вы уверенны ?')) {
-      todoItem.remove();
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i].id === obj.id) arr.splice(i, 1);
-      }
-    }
-  });
+  // btnDelete.addEventListener('click', () => {
+  //   if (confirm('Вы уверенны ?')) {
+  //     todoItem.remove();
+  //     for (let i = 0; i < arr.length; i++) {
+  //       if (arr[i].id === obj.id) arr.splice(i, 1);
+  //     }
+  //   }
+  // });
 
 
-  return todoItem;
+  return {
+    todoItem,
+    btnDone,
+    btnDelete,
+  };
 };

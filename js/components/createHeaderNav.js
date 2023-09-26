@@ -1,7 +1,4 @@
-import {dadPage} from '../pages/dadPage.js';
-import {momPage} from '../pages/momPage.js';
-import {myPage} from '../pages/myPage.js';
-import {preloader} from '../utils/preloader.js';
+import {navigations} from '../utils/navigation.js';
 
 export const headerNav = () => {
   const header = document.createElement('header');
@@ -9,7 +6,6 @@ export const headerNav = () => {
   const momLink = document.createElement('a');
   const dadLink = document.createElement('a');
   const myLink = document.createElement('a');
-  const load = preloader();
 
   const selectionButton = document.createElement('button');
 
@@ -28,44 +24,25 @@ export const headerNav = () => {
   dadLink.href = 'dad';
   myLink.href = 'my';
 
-
   navigation.append(myLink, momLink, dadLink, selectionButton);
   header.append(navigation);
 
   myLink.addEventListener('click', (e) => {
     e.preventDefault();
-    const main = document.querySelector('.main');
-    document.body.append(load);
-    main.innerHTML = '';
-    const my = myPage();
-    setTimeout(() => {
-      load.remove();
-      main.append(my);
-    }, 2000);
+    document.querySelector('.main').innerHTML = '';
+    navigations();
   });
 
   dadLink.addEventListener('click', (e) => {
     e.preventDefault();
-    const main = document.querySelector('.main');
-    document.body.append(load);
-    main.innerHTML = '';
-    const dad = dadPage();
-    setTimeout(() => {
-      load.remove();
-      main.append(dad);
-    }, 2000);
+    document.querySelector('.main').innerHTML = '';
+    navigations('dad');
   });
 
   momLink.addEventListener('click', (e) => {
     e.preventDefault();
-    const main = document.querySelector('.main');
-    document.body.append(load);
-    main.innerHTML = '';
-    const mom = momPage();
-    setTimeout(() => {
-      load.remove();
-      main.append(mom);
-    }, 2000);
+    document.querySelector('.main').innerHTML = '';
+    navigations('mom');
   });
 
   let isButtonClicked = false;
@@ -81,7 +58,6 @@ export const headerNav = () => {
       isButtonClicked = true;
     }
   });
-
 
   return header;
 };
