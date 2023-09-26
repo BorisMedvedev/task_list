@@ -35,9 +35,13 @@ export const headerNav = () => {
   myLink.addEventListener('click', (e) => {
     e.preventDefault();
     const main = document.querySelector('.main');
+    document.body.append(load);
     main.innerHTML = '';
     const my = myPage();
-    main.append(my);
+    setTimeout(() => {
+      load.remove();
+      main.append(my);
+    }, 2000);
   });
 
   dadLink.addEventListener('click', (e) => {
@@ -49,15 +53,19 @@ export const headerNav = () => {
     setTimeout(() => {
       load.remove();
       main.append(dad);
-    }, 1500);
+    }, 2000);
   });
 
   momLink.addEventListener('click', (e) => {
     e.preventDefault();
     const main = document.querySelector('.main');
+    document.body.append(load);
     main.innerHTML = '';
     const mom = momPage();
-    main.append(mom);
+    setTimeout(() => {
+      load.remove();
+      main.append(mom);
+    }, 2000);
   });
 
   let isButtonClicked = false;
