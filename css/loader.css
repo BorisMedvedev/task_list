@@ -1,80 +1,43 @@
-.wrapper {
-  position: relative;
-  top: -300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  
-}
-
-.main-circle {
-  width: 150px;
-  height: 150px;
-  border: 4px solid blue;
-  border-top: 4px solid transparent;
-  border-right: 4px solid transparent;
-  position: absolute;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: rotate 2s infinite;
-}
-
-.main-circle:before {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  content: '';
-  border: 4px solid transparent;
-  border-right: 4px solid blue;
-  transform: rotate(40deg);
-  border-radius: 50%;
-}
-
-.green-circle {
-  animation: rotate 2s infinite .4s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 120px;
-  height: 120px;
-  border: 4px solid blue;
-  border-top: 4px solid transparent;
-  border-right: 4px solid transparent;
-  transform: rotate(-20deg);
-  border-radius: 50%;
-  position: absolute;
-}
-
-.green-circle:before {
-  content: '';
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  position: absolute;
-  border: 4px solid transparent;
-  border-right: 4px solid blue;
-  transform: rotate(60deg);
-}
-
-.brown-circle {
-  position: absolute;
-  animation: rotate 2s infinite .6s;
-  width: 80px;
-  height: 80px;
-  border: 4px solid blue;
-  border-top: 4px solid transparent;
-  border-right: 4px solid transparent;
-  transform: rotate(-20deg);
-  border-radius: 50%;
-}
-
-@keyframes rotate {
-  from {}
-
-  to {
-    transform: rotate(360deg);
+.center {
+    width: 40px;
+    margin: 150px auto;
   }
-}
+  
+  .preloader {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border: solid 3px;
+    border-color: #555555 transparent;
+    border-radius: 50%;
+      -webkit-animation: 
+          rota 1s ease-in-out infinite;
+      -moz-animation: 
+          rota 1s ease-in-out infinite;
+      -ms-animation: 
+          rota 1s ease-in-out infinite;
+      -o-animation: 
+          rota 1s ease-in-out infinite;
+      animation: 
+          rota 1s ease-in-out infinite;
+  }
+  
+  @-webkit-keyframes rota {
+      to { -webkit-transform: rotate(360deg);}
+  }
+  
+  @-moz-keyframes rota {
+      to { -moz-transform: rotate(360deg); }
+  }
+  
+  @-ms-keyframes rota {
+      to { -ms-transform: rotate(360deg); }
+  }
+  
+  @-o-keyframes rota {
+      to { -o-transform: rotate(360deg); }
+  }
+  
+  @keyframes rota {
+      to { transform: rotate(360deg); }
+  }

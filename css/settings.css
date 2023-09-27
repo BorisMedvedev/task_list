@@ -88,7 +88,7 @@ a {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 30px;
 }
 
 .link-primary {
@@ -100,6 +100,26 @@ a {
     margin-left: 15px;
     transition: background-color 0.3s;
 }
+
+@media (max-width: 860px) {
+    .btn-info {
+        margin-left: 0;
+        width: 100%;
+       
+    }
+
+    .navigation {
+        gap: 15px;
+    }
+
+    .btn-primary {
+        font-size: 14px;
+    }
+
+    .form-control::placeholder {
+        font-size: 14px;
+    }
+  }
 
 .btn-info.active {
     background-color: aquamarine;

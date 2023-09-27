@@ -1,4 +1,5 @@
 import {navigations} from '../utils/navigation.js';
+import {preloader} from '../utils/preloader.js';
 
 export const headerNav = () => {
   const header = document.createElement('header');
@@ -27,22 +28,35 @@ export const headerNav = () => {
   navigation.append(myLink, momLink, dadLink, selectionButton);
   header.append(navigation);
 
+  const load = preloader();
   myLink.addEventListener('click', (e) => {
     e.preventDefault();
     document.querySelector('.main').innerHTML = '';
-    navigations();
+    document.querySelector('.main').append(load);
+    setTimeout(() => {
+      load.remove();
+      navigations();
+    }, 1000);
   });
 
   dadLink.addEventListener('click', (e) => {
     e.preventDefault();
     document.querySelector('.main').innerHTML = '';
-    navigations('dad');
+    document.querySelector('.main').append(load);
+    setTimeout(() => {
+      load.remove();
+      navigations('dad');
+    }, 1000);
   });
 
   momLink.addEventListener('click', (e) => {
     e.preventDefault();
     document.querySelector('.main').innerHTML = '';
-    navigations('mom');
+    document.querySelector('.main').append(load);
+    setTimeout(() => {
+      load.remove();
+      navigations('mom');
+    }, 1000);
   });
 
   let isButtonClicked = false;
