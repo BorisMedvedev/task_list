@@ -2,6 +2,7 @@ import {dadArray} from '../pages/dadPage.js';
 import {navigations} from '../utils/navigation.js';
 import {preloader} from '../utils/preloader.js';
 import {render} from '../utils/render.js';
+import {createTodoItem} from './createTodoItem.js';
 import {createTodoList} from './createTodoList.js';
 
 export const headerNav = () => {
@@ -68,6 +69,8 @@ export const headerNav = () => {
   let useServerStorage = false;
   const list = createTodoList();
 
+  const newServerData = JSON.parse(
+      localStorage.getItem('storageStatus')) || [];
   selectionButton.addEventListener('click', () => {
     useServerStorage = !useServerStorage;
     selectionButton.textContent = useServerStorage ?
@@ -75,17 +78,19 @@ export const headerNav = () => {
     'Перейти на серверное хранилище';
 
     const loadTodoItems = async () => {
-      // Очистите текущий список дел
-      // ... (здесь должен быть ваш код)
+      document.querySelector('.list-item').innerHTML = '';
+
       list.innerHTML = '';
       if (useServerStorage) {
-        // Загрузите данные с сервера через API
         const response = await fetch(TODO_API_URL);
         const serverData = await response.json();
-        displayTodoItems(serverData);
+        newServerData.forEach(element => {
+          const newItem = createTodoItem(element);
+          document.querySelector('.list-item').append(newItem.todoItem);
+        });
+        localStorage.setItem('storageStatus', JSON.stringify(serverData));
       } else {
-        // Загрузить данные из локального хранилища
-        // ... (здесь должен быть ваш код)
+        window.location.reload();
       }
     };
     loadTodoItems();
