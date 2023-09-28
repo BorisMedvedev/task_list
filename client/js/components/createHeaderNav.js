@@ -1,5 +1,8 @@
+import {dadArray} from '../pages/dadPage.js';
 import {navigations} from '../utils/navigation.js';
 import {preloader} from '../utils/preloader.js';
+import {render} from '../utils/render.js';
+import {createTodoList} from './createTodoList.js';
 
 export const headerNav = () => {
   const header = document.createElement('header');
@@ -38,7 +41,7 @@ export const headerNav = () => {
     setTimeout(() => {
       load.remove();
       navigations();
-    }, 1000);
+    }, 500);
   });
 
   dadLink.addEventListener('click', (e) => {
@@ -48,7 +51,7 @@ export const headerNav = () => {
     setTimeout(() => {
       load.remove();
       navigations('dad');
-    }, 1000);
+    }, 500);
   });
 
   momLink.addEventListener('click', (e) => {
@@ -58,27 +61,12 @@ export const headerNav = () => {
     setTimeout(() => {
       load.remove();
       navigations('mom');
-    }, 1000);
+    }, 500);
   });
 
-  // let isButtonClicked = false;
-
-  // selectionButton.addEventListener('click', () => {
-  //   if (isButtonClicked) {
-  //     selectionButton.textContent = 'Перейти на серверное хранилище';
-  //     selectionButton.classList.remove('active');
-  //     info.textContent = 'Сейчас локальное хранилище';
-  //     isButtonClicked = false;
-  //   } else {
-  //     selectionButton.textContent = 'Перейти на локальное хранилище';
-  //     selectionButton.classList.add('active');
-  //     info.textContent = 'Сейчас серверное хранилище';
-  //     isButtonClicked = true;
-  //   }
-  // });
-
-  const TODO_API_URL = 'https://your-todo-api-example.com';
+  const TODO_API_URL = 'http://localhost:3000/api/todos';
   let useServerStorage = false;
+  const list = createTodoList();
 
   selectionButton.addEventListener('click', () => {
     useServerStorage = !useServerStorage;
@@ -89,12 +77,12 @@ export const headerNav = () => {
     const loadTodoItems = async () => {
       // Очистите текущий список дел
       // ... (здесь должен быть ваш код)
-
+      list.innerHTML = '';
       if (useServerStorage) {
         // Загрузите данные с сервера через API
         const response = await fetch(TODO_API_URL);
         const serverData = await response.json();
-        // displayTodoItems(serverData);
+        displayTodoItems(serverData);
       } else {
         // Загрузить данные из локального хранилища
         // ... (здесь должен быть ваш код)

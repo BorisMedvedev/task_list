@@ -1,10 +1,10 @@
-export const loadTodoItems = async () => {
+export const loadTodoItemsApi = async () => {
   const response = await fetch('http://localhost:3000/api/todos');
   const data = await response.json();
   console.log(data);
 };
 
-export const createTodoItem = async () => {
+export const createTodoItemApi = async () => {
   const response = await fetch('http://localhost:3000/api/todos', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -13,6 +13,33 @@ export const createTodoItem = async () => {
       owner: 'Тимофей',
     }),
   });
+  const data = await response.json();
+  console.log(data);
+};
+
+export const getTodoItemApi = async () => {
+  const response = await fetch('http://localhost:3000/api/todos/1608029025426');
+  const data = await response.json();
+  console.log(data);
+};
+
+export const markTodoAsDoneApi = async () => {
+  const response = await fetch('http://localhost:3000/api/todos/1608029025426', {
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({done: true}),
+  });
+  const data = await response.json();
+  console.log(data);
+};
+
+export const deleteTodoItemApi = async () => {
+  const response = await fetch('http://localhost:3000/api/todos/1608029025426', {
+    method: 'DELETE',
+  });
+  if (response.status === 404) {
+    console.log('Не удалось удалить дело, так как его не существует');
+  }
   const data = await response.json();
   console.log(data);
 };
