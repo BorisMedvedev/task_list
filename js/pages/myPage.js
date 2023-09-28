@@ -1,7 +1,7 @@
 import {createForm} from '../components/createForm.js';
 import {createTitle} from '../components/createTitle.js';
-import {createTodoItem} from '../components/createTodoItem.js';
 import {createTodoList} from '../components/createTodoList.js';
+import {render} from '../utils/render.js';
 import {generateId} from '../utils/utils.js';
 export const myArray = JSON.parse(localStorage.getItem('myArray')) || [];
 
@@ -27,16 +27,11 @@ export const myPage = () => {
     document.querySelector('.btn-primary').disabled = true;
     myArray.push(newItem);
     localStorage.setItem('myArray', JSON.stringify(myArray));
-    for (const item of myArray) {
-      const listItem = createTodoItem(item);
-      list.append(listItem.todoItem);
-    }
+
+    render(myArray, list);
   });
 
-  for (const item of myArray) {
-    const listItem = createTodoItem(item);
-    list.append(listItem.todoItem);
-  }
+  render(myArray, list);
 
   return mainContainerMyPage;
 };

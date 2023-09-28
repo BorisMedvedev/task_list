@@ -1,6 +1,9 @@
+import {createTodoItem} from '../components/createTodoItem.js';
+
 export const render = (arr, app) => {
   for (const item of arr) {
-    app.prepend(item);
+    const listItem = createTodoItem(item);
+    app.append(listItem.todoItem);
   }
 };
 
