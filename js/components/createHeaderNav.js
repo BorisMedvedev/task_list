@@ -61,20 +61,46 @@ export const headerNav = () => {
     }, 1000);
   });
 
-  let isButtonClicked = false;
+  // let isButtonClicked = false;
+
+  // selectionButton.addEventListener('click', () => {
+  //   if (isButtonClicked) {
+  //     selectionButton.textContent = 'Перейти на серверное хранилище';
+  //     selectionButton.classList.remove('active');
+  //     info.textContent = 'Сейчас локальное хранилище';
+  //     isButtonClicked = false;
+  //   } else {
+  //     selectionButton.textContent = 'Перейти на локальное хранилище';
+  //     selectionButton.classList.add('active');
+  //     info.textContent = 'Сейчас серверное хранилище';
+  //     isButtonClicked = true;
+  //   }
+  // });
+
+  const TODO_API_URL = 'https://your-todo-api-example.com';
+  let useServerStorage = false;
 
   selectionButton.addEventListener('click', () => {
-    if (isButtonClicked) {
-      selectionButton.textContent = 'Перейти на серверное хранилище';
-      selectionButton.classList.remove('active');
-      info.textContent = 'Сейчас локальное хранилище';
-      isButtonClicked = false;
-    } else {
-      selectionButton.textContent = 'Перейти на локальное хранилище';
-      selectionButton.classList.add('active');
-      info.textContent = 'Сейчас серверное хранилище';
-      isButtonClicked = true;
-    }
+    useServerStorage = !useServerStorage;
+    selectionButton.textContent = useServerStorage ?
+    'Перейти на локальное хранилище' :
+    'Перейти на серверное хранилище';
+
+    const loadTodoItems = async () => {
+      // Очистите текущий список дел
+      // ... (здесь должен быть ваш код)
+
+      if (useServerStorage) {
+        // Загрузите данные с сервера через API
+        const response = await fetch(TODO_API_URL);
+        const serverData = await response.json();
+        // displayTodoItems(serverData);
+      } else {
+        // Загрузить данные из локального хранилища
+        // ... (здесь должен быть ваш код)
+      }
+    };
+    loadTodoItems();
   });
   return header;
 };
