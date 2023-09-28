@@ -9,12 +9,14 @@ export const headerNav = () => {
   const myLink = document.createElement('a');
 
   const selectionButton = document.createElement('button');
+  const info = document.createElement('span');
 
   selectionButton.classList.add('btn', 'btn-info');
   selectionButton.textContent = 'Перейти на серверное хранилище';
   momLink.textContent = 'Список дел мамы';
   dadLink.textContent = 'Список дел папы';
   myLink.textContent = 'Список дел мой';
+
 
   navigation.classList.add('navigation', 'container');
   momLink.classList.add('link-primary');
@@ -25,7 +27,7 @@ export const headerNav = () => {
   dadLink.href = 'dad';
   myLink.href = 'my';
 
-  navigation.append(myLink, momLink, dadLink, selectionButton);
+  navigation.append(myLink, momLink, dadLink, selectionButton, info);
   header.append(navigation);
 
   const load = preloader();
@@ -65,13 +67,14 @@ export const headerNav = () => {
     if (isButtonClicked) {
       selectionButton.textContent = 'Перейти на серверное хранилище';
       selectionButton.classList.remove('active');
+      info.textContent = 'Сейчас локальное хранилище';
       isButtonClicked = false;
     } else {
       selectionButton.textContent = 'Перейти на локальное хранилище';
       selectionButton.classList.add('active');
+      info.textContent = 'Сейчас серверное хранилище';
       isButtonClicked = true;
     }
   });
-
   return header;
 };

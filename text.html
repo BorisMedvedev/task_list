@@ -1,0 +1,72 @@
+Чтобы добавить такую функциональность в ваше приложение, нужно выполнить несколько шагов:
+
+Создайте кнопку для переключения хранилища и добавьте ее над списком дел.
+Добавьте функцию для изменения хранилища и перезагрузки списка дел.
+Создайте API на сервере для работы с данными и реализуйте функции для выполнения операций с серверным хранилищем.
+Сначала создадим кнопку и добавим ее над списком дел:
+
+const switchStorageBtn = document.createElement('button');
+switchStorageBtn.textContent = "Перейти на серверное хранилище"; // По умолчанию используется локальное хранилище.
+document.body.insertBefore(switchStorageBtn, document.querySelector('.list-group'));
+Теперь добавим обработчик для переключения хранилища и перезагрузки списка дел:
+
+const TODO_API_URL = "https://your-todo-api-example.com"; // Замените на ваш URL серверного API
+let useServerStorage = false;
+
+switchStorageBtn.addEventListener('click', () => {
+  useServerStorage = !useServerStorage;
+  switchStorageBtn.textContent = useServerStorage ? "Перейти на локальное хранилище" : "Перейти на серверное хранилище";
+  loadTodoItems(); // Функция для перезагрузки списка дел с текущим хранилищем; должна быть реализована
+});
+Прикрепите обработчик событий к кнопке переключения. Теперь создайте функцию loadTodoItems(), которая будет загружать список дел из активного хранилища и отображать его.
+
+async function loadTodoItems() {
+  // Очистите текущий список дел
+  // ... (здесь должен быть ваш код)
+  
+  if (useServerStorage) {
+    // Загрузите данные с сервера через API
+    const response = await fetch(TODO_API_URL);
+    const serverData = await response.json();
+    displayTodoItems(serverData); // Функция для отображения данных загруженных с сервера; должна быть реализована
+  } else {
+    // Загрузить данные из локального хранилища
+    // ... (здесь должен быть ваш код)
+  }
+}
+Следующим шагом будет реализация серверного API, которое позволит работать со списком дел на сервере.
+
+Пример серверного API может выглядеть так:
+
+GET /todos – получить список дел
+POST /todos – создать новое дело
+PUT /todos/:id – обновить дело с указанным идентификатором
+DELETE /todos/:id – удалить дело с указанным идентификатором
+Вам нужно будет заменить функции, работающие с локальным хранилищем, на функции, работающие с серверным API, когда useServerStorage установлен в true.
+
+Например, для удаления элемента дела:
+
+async function deleteItemFromServer(id) {
+  await fetch(`${TODO_API_URL}/${id}`, {
+    method: 'DELETE',
+  });
+}
+
+const deleteItem = async (array, storageName) => {
+  btnDelete.addEventListener('click', async () => {
+    if (confirm('Вы уверенны ?')) {
+      todoItem.remove();
+      if (useServerStorage) {
+        await deleteItemFromServer(obj.id);
+      } else {
+        for (let i = 0; i < array.length; i++) {
+          if (array[i].id === obj.id) {
+            array.splice(i, 1);
+          }
+        }
+        localStorage.setItem(storageName, JSON.stringify(array));
+      }
+    }
+  });
+};
+Повторите это для других операций, таких как создание, обновление и получение списка дел, учтите различия между локальным хранилищем и серверным API.

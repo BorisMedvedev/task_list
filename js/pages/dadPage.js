@@ -1,6 +1,5 @@
 import {createForm} from '../components/createForm.js';
 import {createTitle} from '../components/createTitle.js';
-import {createTodoItem} from '../components/createTodoItem.js';
 import {createTodoList} from '../components/createTodoList.js';
 import {render} from '../utils/render.js';
 import {generateId} from '../utils/utils.js';
@@ -27,22 +26,8 @@ export const dadPage = () => {
     document.querySelector('.form-control').value = '';
     document.querySelector('.btn-primary').disabled = true;
     dadArray.push(newItem);
-
+    localStorage.setItem('dadArray', JSON.stringify(dadArray));
     render(dadArray, list);
-  });
-
-
-  dadArray.forEach((item) => {
-    const obj = {
-      id: item.id,
-      done: item.done,
-      name: item.name,
-    };
-    const todoItem = createTodoItem(obj);
-    console.log(todoItem.btnDone);
-    todoItem.btnDone.addEventListener('click', () => {
-      console.log('2131364');
-    });
   });
 
 
