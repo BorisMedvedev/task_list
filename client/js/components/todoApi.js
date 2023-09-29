@@ -4,12 +4,12 @@ export const loadTodoItemsApi = async () => {
   console.log(data);
 };
 
-export const createTodoItemApi = async () => {
+export const createTodoItemApi = async (name) => {
   const response = await fetch('http://localhost:3000/api/todos', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      name: 'Сходить за хлебом',
+      name,
       owner: 'Тимофей',
     }),
   });

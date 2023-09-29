@@ -1,6 +1,7 @@
 import {createForm} from '../components/createForm.js';
 import {createTitle} from '../components/createTitle.js';
 import {createTodoList} from '../components/createTodoList.js';
+import {createTodoItemApi} from '../components/todoApi.js';
 import {render} from '../utils/render.js';
 import {generateId} from '../utils/utils.js';
 export const dadArray = JSON.parse(localStorage.getItem('dadArray')) || [];
@@ -15,8 +16,9 @@ export const dadPage = () => {
 
   form.form.addEventListener('submit', (e) => {
     e.preventDefault();
-    document.querySelector('.list-item').textContent = '';
     const input = document.querySelector('.form-control').value;
+    createTodoItemApi(input);
+    document.querySelector('.list-item').textContent = '';
 
     const newItem = {};
     newItem.name = input;

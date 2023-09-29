@@ -1,7 +1,5 @@
-import {dadArray} from '../pages/dadPage.js';
 import {navigations} from '../utils/navigation.js';
 import {preloader} from '../utils/preloader.js';
-import {render} from '../utils/render.js';
 import {createTodoItem} from './createTodoItem.js';
 import {createTodoList} from './createTodoList.js';
 
