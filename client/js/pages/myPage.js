@@ -16,9 +16,16 @@ export const myPage = () => {
 
   form.form.addEventListener('submit', (e) => {
     e.preventDefault();
+
     document.querySelector('.list-item').textContent = '';
+
     const input = document.querySelector('.form-control').value;
-    createTodoItemApi(input);
+
+    const owner = 'myApi';
+    const name = input;
+
+    createTodoItemApi({owner, name});
+
     const newItem = {};
     newItem.name = input;
     newItem.done = false;
@@ -27,6 +34,7 @@ export const myPage = () => {
     document.querySelector('.form-control').value = '';
     document.querySelector('.btn-primary').disabled = true;
     myArray.push(newItem);
+
     localStorage.setItem('myArray', JSON.stringify(myArray));
 
     render(myArray, list);

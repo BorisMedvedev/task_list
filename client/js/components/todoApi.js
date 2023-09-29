@@ -4,17 +4,18 @@ export const loadTodoItemsApi = async () => {
   console.log(data);
 };
 
-export const createTodoItemApi = async (name) => {
+export const createTodoItemApi = async ({name, owner}) => {
   const response = await fetch('http://localhost:3000/api/todos', {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       name,
-      owner: 'Тимофей',
+      owner,
     }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
-  const data = await response.json();
-  console.log(data);
+  return await response.json();
 };
 
 export const getTodoItemApi = async () => {

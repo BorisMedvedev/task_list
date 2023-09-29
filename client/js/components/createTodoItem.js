@@ -60,19 +60,19 @@ export const createTodoItem = (obj) => {
   });
 
 
-  const deleteItem = (array, storageName) => {
-    btnDelete.addEventListener('click', () => {
-      if (confirm('Вы уверенны ?')) {
-        todoItem.remove();
-        for (let i = 0; i < array.length; i++) {
-          if (array[i].id === obj.id) {
-            array.splice(i, 1);
-          }
-        }
-        localStorage.setItem(storageName, JSON.stringify(array));
-      }
-    });
-  };
+  // const deleteItem = (array, storageName) => {
+  //   btnDelete.addEventListener('click', () => {
+  //     if (confirm('Вы уверенны ?')) {
+  //       todoItem.remove();
+  //       for (let i = 0; i < array.length; i++) {
+  //         if (array[i].id === obj.id) {
+  //           array.splice(i, 1);
+  //         }
+  //       }
+  //       localStorage.setItem(storageName, JSON.stringify(array));
+  //     }
+  //   });
+  // };
 
   let currentArray;
   let storageName;
@@ -88,7 +88,7 @@ export const createTodoItem = (obj) => {
     storageName = 'dadArray';
   }
 
-  deleteItem(currentArray, storageName);
+  // deleteItem(currentArray, storageName);
 
   return {
     todoItem,

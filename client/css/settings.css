@@ -74,7 +74,7 @@ a {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
-    
+
 }
 
 
@@ -105,7 +105,7 @@ a {
     .btn-info {
         margin-left: 0;
         width: 100%;
-       
+
     }
 
     .navigation {
@@ -119,8 +119,44 @@ a {
     .form-control::placeholder {
         font-size: 14px;
     }
-  }
+}
 
 .btn-info.active {
     background-color: aquamarine;
+}
+
+
+.indicator {
+    margin-right: -22px;
+    display: flex;
+    align-items: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: blue;
+    animation: blink 1s linear infinite;
+
+}
+
+.indicator.active {
+
+    background-color: rgb(255, 0, 0);
+}
+
+.indicatortext {
+    display: block;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

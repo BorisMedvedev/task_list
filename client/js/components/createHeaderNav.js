@@ -9,16 +9,19 @@ export const headerNav = () => {
   const momLink = document.createElement('a');
   const dadLink = document.createElement('a');
   const myLink = document.createElement('a');
+  const indicator = document.createElement('span');
+  const indicatorText = document.createElement('span');
 
   const selectionButton = document.createElement('button');
-  const info = document.createElement('span');
 
   selectionButton.classList.add('btn', 'btn-info');
+  indicator.classList.add('indicator');
+  indicatorText.classList.add('indicatortext');
   selectionButton.textContent = 'Перейти на серверное хранилище';
   momLink.textContent = 'Список дел мамы';
   dadLink.textContent = 'Список дел папы';
   myLink.textContent = 'Список дел мой';
-
+  indicatorText.textContent = 'Local';
 
   navigation.classList.add('navigation', 'container');
   momLink.classList.add('link-primary');
@@ -29,7 +32,7 @@ export const headerNav = () => {
   dadLink.href = 'dad';
   myLink.href = 'my';
 
-  navigation.append(myLink, momLink, dadLink, selectionButton, info);
+  navigation.append(myLink, momLink, dadLink, selectionButton, indicator, indicatorText);
   header.append(navigation);
 
   const load = preloader();
@@ -70,10 +73,16 @@ export const headerNav = () => {
   const newServerData = JSON.parse(
       localStorage.getItem('storageStatus')) || [];
   selectionButton.addEventListener('click', () => {
-    useServerStorage = !useServerStorage;
-    selectionButton.textContent = useServerStorage ?
-    'Перейти на локальное хранилище' :
-    'Перейти на серверное хранилище';
+    if (useServerStorage = !useServerStorage) {
+      selectionButton.textContent = 'Перейти на локальное хранилище';
+      indicatorText.textContent = 'Server';
+      indicator.classList.add('active');
+    } else {
+      selectionButton.textContent = 'Перейти на серверное хранилище';
+      indicatorText.textContent = 'Local';
+      indicator.classList.remove('active');
+    }
+
 
     const loadTodoItems = async () => {
       document.querySelector('.list-item').innerHTML = '';
