@@ -1,7 +1,6 @@
 import {dadArray} from '../pages/dadPage.js';
 import {momArray} from '../pages/momPage.js';
-import {myArray, myArrayApi} from '../pages/myPage.js';
-import {createTodoItemApi, markTodoAsDoneApi} from './todoApi.js';
+import {myArray} from '../pages/myPage.js';
 
 export const createTodoItem = (obj) => {
   const todoItem = document.createElement('li');

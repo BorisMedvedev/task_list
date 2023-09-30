@@ -1,39 +1,40 @@
 import {createForm} from '../components/createForm.js';
-import {headerNav} from '../components/createHeaderNav.js';
 import {createTitle} from '../components/createTitle.js';
-import {createTodoItem} from '../components/createTodoItem.js';
 import {createTodoList} from '../components/createTodoList.js';
 import {createTodoItemApi, getTodoList} from '../components/todoApi.js';
 import {render} from '../utils/render.js';
 import {generateId} from '../utils/utils.js';
 export const myArray = JSON.parse(localStorage.getItem('myArray')) || [];
 export const myArrayApi = await getTodoList('myApi');
-console.log(myArrayApi);
 
 export const myPage = () => {
   const mainContainerMyPage = document.createElement('div');
   const myTitle = createTitle('Мой список');
   const form = createForm();
   const list = createTodoList();
-  const header = headerNav();
+  const selectionButton = document.querySelector('.btn-info');
   mainContainerMyPage.append(myTitle, form.form, list);
 
 
-  const useServerStorage = false;
+  let useServerStorage = true;
 
-  const selectionButton = document.querySelector('.btn-info');
 
-  header.selectionButton.addEventListener('click', () => {
-    console.log(useServerStorage);
-
+  selectionButton.addEventListener('click', () => {
+    useServerStorage = !useServerStorage;
     if (useServerStorage) {
       selectionButton.textContent = 'Перейти на локальное хранилище';
-      header.indicatorText.textContent = 'Server';
-      header.indicator.classList.add('active');
+      document.querySelector('.indicatortext').textContent = 'Server';
+      document.querySelector('.indicator').classList.add('active');
+      document.querySelector('.list-item').textContent = '';
+
+      render(myArrayApi, list);
     } else {
       selectionButton.textContent = 'Перейти на серверное хранилище';
-      header.indicatorText.textContent = 'Local';
-      header.indicator.classList.remove('active');
+      document.querySelector('.indicatortext').textContent = 'Local';
+      document.querySelector('.indicator').classList.remove('active');
+      document.querySelector('.list-item').textContent = '';
+
+      render(myArray, list);
     }
   });
 
@@ -50,6 +51,7 @@ export const myPage = () => {
       const name = input;
 
       createTodoItemApi({owner, name});
+      render(myArrayApi, list);
     } else {
       const newItem = {};
 
@@ -65,6 +67,7 @@ export const myPage = () => {
       render(myArray, list);
     }
   });
+
 
   if (!useServerStorage) {
     render(myArrayApi, list);
