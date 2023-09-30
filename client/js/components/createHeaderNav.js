@@ -66,41 +66,11 @@ export const headerNav = () => {
     }, 500);
   });
 
-  const TODO_API_URL = 'http://localhost:3000/api/todos';
-  let useServerStorage = false;
-  const list = createTodoList();
 
-  const newServerData = JSON.parse(
-      localStorage.getItem('storageStatus')) || [];
-  selectionButton.addEventListener('click', () => {
-    if (useServerStorage = !useServerStorage) {
-      selectionButton.textContent = 'Перейти на локальное хранилище';
-      indicatorText.textContent = 'Server';
-      indicator.classList.add('active');
-    } else {
-      selectionButton.textContent = 'Перейти на серверное хранилище';
-      indicatorText.textContent = 'Local';
-      indicator.classList.remove('active');
-    }
-
-
-    const loadTodoItems = async () => {
-      document.querySelector('.list-item').innerHTML = '';
-
-      list.innerHTML = '';
-      if (useServerStorage) {
-        const response = await fetch(TODO_API_URL);
-        const serverData = await response.json();
-        newServerData.forEach(element => {
-          const newItem = createTodoItem(element);
-          document.querySelector('.list-item').append(newItem.todoItem);
-        });
-        localStorage.setItem('storageStatus', JSON.stringify(serverData));
-      } else {
-        window.location.reload();
-      }
-    };
-    loadTodoItems();
-  });
-  return header;
+  return {
+    header,
+    selectionButton,
+    indicator,
+    indicatorText,
+  };
 };
