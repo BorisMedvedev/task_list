@@ -1,7 +1,6 @@
 export const loadTodoItemsApi = async () => {
   const response = await fetch('http://localhost:3000/api/todos');
-  const data = await response.json();
-  console.log(data);
+  return await response.json();
 };
 
 export const createTodoItemApi = async ({name, owner}) => {
@@ -18,20 +17,18 @@ export const createTodoItemApi = async ({name, owner}) => {
   return await response.json();
 };
 
-export const getTodoItemApi = async () => {
-  const response = await fetch('http://localhost:3000/api/todos/1608029025426');
-  const data = await response.json();
-  console.log(data);
+export const getTodoList = async (owner) => {
+  const response = await fetch(`http://localhost:3000/api/todos?owner=${owner}`);
+  return await response.json();
 };
 
-export const markTodoAsDoneApi = async () => {
-  const response = await fetch('http://localhost:3000/api/todos/1608029025426', {
+export const markTodoAsDoneApi = async (id, doneStatus) => {
+  const response = await fetch(`http://localhost:3000/api/todos/1608029025426=${id}`, {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({done: true}),
+    body: JSON.stringify({done: doneStatus}),
   });
-  const data = await response.json();
-  console.log(data);
+  return await response.json();
 };
 
 export const deleteTodoItemApi = async () => {

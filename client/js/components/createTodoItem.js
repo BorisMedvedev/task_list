@@ -1,6 +1,7 @@
 import {dadArray} from '../pages/dadPage.js';
 import {momArray} from '../pages/momPage.js';
-import {myArray} from '../pages/myPage.js';
+import {myArray, myArrayApi} from '../pages/myPage.js';
+import {createTodoItemApi, markTodoAsDoneApi} from './todoApi.js';
 
 export const createTodoItem = (obj) => {
   const todoItem = document.createElement('li');
@@ -56,23 +57,24 @@ export const createTodoItem = (obj) => {
       storageName = 'dadArray';
     }
 
+
     localStorage.setItem(storageName, JSON.stringify(currentArray));
   });
 
 
-  // const deleteItem = (array, storageName) => {
-  //   btnDelete.addEventListener('click', () => {
-  //     if (confirm('Вы уверенны ?')) {
-  //       todoItem.remove();
-  //       for (let i = 0; i < array.length; i++) {
-  //         if (array[i].id === obj.id) {
-  //           array.splice(i, 1);
-  //         }
-  //       }
-  //       localStorage.setItem(storageName, JSON.stringify(array));
-  //     }
-  //   });
-  // };
+  const deleteItem = (array, storageName) => {
+    btnDelete.addEventListener('click', () => {
+      if (confirm('Вы уверенны ?')) {
+        todoItem.remove();
+        for (let i = 0; i < array.length; i++) {
+          if (array[i].id === obj.id) {
+            array.splice(i, 1);
+          }
+        }
+        localStorage.setItem(storageName, JSON.stringify(array));
+      }
+    });
+  };
 
   let currentArray;
   let storageName;
@@ -88,7 +90,7 @@ export const createTodoItem = (obj) => {
     storageName = 'dadArray';
   }
 
-  // deleteItem(currentArray, storageName);
+  deleteItem(currentArray, storageName);
 
   return {
     todoItem,
