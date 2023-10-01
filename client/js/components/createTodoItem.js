@@ -1,6 +1,7 @@
 import {dadArray} from '../pages/dadPage.js';
 import {momArray} from '../pages/momPage.js';
 import {myArray} from '../pages/myPage.js';
+import {markTodoAsDoneApi} from './todoApi.js';
 
 export const createTodoItem = (obj) => {
   const todoItem = document.createElement('li');
@@ -55,6 +56,7 @@ export const createTodoItem = (obj) => {
       currentArray = dadArray;
       storageName = 'dadArray';
     }
+    markTodoAsDoneApi(obj.id, obj.done);
 
 
     localStorage.setItem(storageName, JSON.stringify(currentArray));

@@ -23,7 +23,7 @@ export const getTodoList = async (owner) => {
 };
 
 export const markTodoAsDoneApi = async (id, doneStatus) => {
-  const response = await fetch(`http://localhost:3000/api/todos/1608029025426=${id}`, {
+  const response = await fetch(`http://localhost:3000/api/todos/${id}`, {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({done: doneStatus}),
