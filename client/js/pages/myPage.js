@@ -41,18 +41,17 @@ export const myPage = () => {
   });
 
 
-  form.form.addEventListener('submit', (e) => {
+  form.form.addEventListener('submit', async (e) => {
     e.preventDefault();
     document.querySelector('.list-item').textContent = '';
-
-
     const input = document.querySelector('.form-control').value;
 
     if (!useServerStorage) {
       const owner = 'myApi';
       const name = input;
 
-      createTodoItemApi({owner, name});
+      const createdItem = await createTodoItemApi({owner, name});
+      myArrayApi.push(createdItem);
 
       render(myArrayApi, list);
     } else {
@@ -65,13 +64,11 @@ export const myPage = () => {
       document.querySelector('.form-control').value = '';
       document.querySelector('.btn-primary').disabled = true;
       myArray.push(newItem);
-
       localStorage.setItem('myArray', JSON.stringify(myArray));
 
       render(myArray, list);
     }
   });
-
 
   if (!useServerStorage) {
     render(myArrayApi, list);
