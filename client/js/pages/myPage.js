@@ -15,25 +15,27 @@ export const myPage = () => {
   const selectionButton = document.querySelector('.btn-info');
   mainContainerMyPage.append(myTitle, form.form, list);
 
-
+  console.log(myArrayApi);
   let useServerStorage = true;
 
 
   selectionButton.addEventListener('click', () => {
+    console.log(useServerStorage);
     useServerStorage = !useServerStorage;
-    if (useServerStorage) {
+    if (!useServerStorage) {
       selectionButton.textContent = 'Перейти на локальное хранилище';
       document.querySelector('.indicatortext').textContent = 'Server';
       document.querySelector('.indicator').classList.add('active');
       document.querySelector('.list-item').textContent = '';
-
-      render(myArrayApi, list);
     } else {
       selectionButton.textContent = 'Перейти на серверное хранилище';
       document.querySelector('.indicatortext').textContent = 'Local';
       document.querySelector('.indicator').classList.remove('active');
       document.querySelector('.list-item').textContent = '';
-
+    }
+    if (!useServerStorage) {
+      render(myArrayApi, list);
+    } else {
       render(myArray, list);
     }
   });
@@ -41,8 +43,8 @@ export const myPage = () => {
 
   form.form.addEventListener('submit', (e) => {
     e.preventDefault();
-
     document.querySelector('.list-item').textContent = '';
+
 
     const input = document.querySelector('.form-control').value;
 
@@ -51,6 +53,7 @@ export const myPage = () => {
       const name = input;
 
       createTodoItemApi({owner, name});
+
       render(myArrayApi, list);
     } else {
       const newItem = {};
@@ -64,6 +67,7 @@ export const myPage = () => {
       myArray.push(newItem);
 
       localStorage.setItem('myArray', JSON.stringify(myArray));
+
       render(myArray, list);
     }
   });
