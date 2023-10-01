@@ -1,7 +1,7 @@
 import {dadArray} from '../pages/dadPage.js';
 import {momArray} from '../pages/momPage.js';
 import {myArray} from '../pages/myPage.js';
-import {markTodoAsDoneApi} from './todoApi.js';
+import {deleteTodoItemApi, markTodoAsDoneApi} from './todoApi.js';
 
 export const createTodoItem = (obj) => {
   const todoItem = document.createElement('li');
@@ -65,6 +65,7 @@ export const createTodoItem = (obj) => {
 
   const deleteItem = (array, storageName) => {
     btnDelete.addEventListener('click', () => {
+      deleteTodoItemApi(obj.id);
       if (confirm('Вы уверенны ?')) {
         todoItem.remove();
         for (let i = 0; i < array.length; i++) {

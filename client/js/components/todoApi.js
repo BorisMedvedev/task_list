@@ -31,8 +31,8 @@ export const markTodoAsDoneApi = async (id, doneStatus) => {
   return await response.json();
 };
 
-export const deleteTodoItemApi = async () => {
-  const response = await fetch('http://localhost:3000/api/todos/1608029025426', {
+export const deleteTodoItemApi = async (id) => {
+  const response = await fetch(`http://localhost:3000/api/todos/${id}`, {
     method: 'DELETE',
   });
   if (response.status === 404) {
