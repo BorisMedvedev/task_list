@@ -1,7 +1,5 @@
 import {navigations} from '../utils/navigation.js';
 import {preloader} from '../utils/preloader.js';
-import {createTodoItem} from './createTodoItem.js';
-import {createTodoList} from './createTodoList.js';
 
 export const headerNav = () => {
   const header = document.createElement('header');
@@ -32,7 +30,13 @@ export const headerNav = () => {
   dadLink.href = 'dad';
   myLink.href = 'my';
 
-  navigation.append(myLink, momLink, dadLink, selectionButton, indicator, indicatorText);
+  navigation.append(
+      myLink,
+      momLink,
+      dadLink,
+      selectionButton,
+      indicator,
+      indicatorText);
   header.append(navigation);
 
   const load = preloader();
@@ -43,7 +47,7 @@ export const headerNav = () => {
     setTimeout(() => {
       load.remove();
       navigations();
-    }, 500);
+    }, 200);
   });
 
   dadLink.addEventListener('click', (e) => {
@@ -53,7 +57,7 @@ export const headerNav = () => {
     setTimeout(() => {
       load.remove();
       navigations('dad');
-    }, 500);
+    }, 200);
   });
 
   momLink.addEventListener('click', (e) => {
@@ -63,7 +67,7 @@ export const headerNav = () => {
     setTimeout(() => {
       load.remove();
       navigations('mom');
-    }, 500);
+    }, 200);
   });
 
 

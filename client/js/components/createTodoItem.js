@@ -1,6 +1,8 @@
 import {dadArray} from '../pages/dadPage.js';
 import {momArray} from '../pages/momPage.js';
 import {myArray} from '../pages/myPage.js';
+import {render} from '../utils/render.js';
+import {createTodoList} from './createTodoList.js';
 import {deleteTodoItemApi, markTodoAsDoneApi} from './todoApi.js';
 
 export const createTodoItem = (obj) => {
@@ -62,11 +64,12 @@ export const createTodoItem = (obj) => {
     localStorage.setItem(storageName, JSON.stringify(currentArray));
   });
 
+  const list = createTodoList();
 
   const deleteItem = (array, storageName) => {
     btnDelete.addEventListener('click', () => {
-      deleteTodoItemApi(obj.id);
       if (confirm('Вы уверенны ?')) {
+        deleteTodoItemApi(obj.id);
         todoItem.remove();
         for (let i = 0; i < array.length; i++) {
           if (array[i].id === obj.id) {
@@ -74,6 +77,7 @@ export const createTodoItem = (obj) => {
           }
         }
         localStorage.setItem(storageName, JSON.stringify(array));
+        render(array, list);
       }
     });
   };

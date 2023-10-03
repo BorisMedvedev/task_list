@@ -9,18 +9,15 @@ export const myArrayApi = await getTodoList('myApi');
 
 export const myPage = () => {
   const mainContainerMyPage = document.createElement('div');
-  const myTitle = createTitle('Мой список');
+  const myTitle = createTitle('Мой список дел');
   const form = createForm();
   const list = createTodoList();
   const selectionButton = document.querySelector('.btn-info');
   mainContainerMyPage.append(myTitle, form.form, list);
 
-  console.log(myArrayApi);
   let useServerStorage = true;
 
-
   selectionButton.addEventListener('click', () => {
-    console.log(useServerStorage);
     useServerStorage = !useServerStorage;
     if (!useServerStorage) {
       selectionButton.textContent = 'Перейти на локальное хранилище';
@@ -39,7 +36,6 @@ export const myPage = () => {
       render(myArray, list);
     }
   });
-
 
   form.form.addEventListener('submit', async (e) => {
     e.preventDefault();
